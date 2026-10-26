@@ -12,8 +12,6 @@ namespace 點餐頁面_新_
     {
         public static string DbFileName = "點餐系統資料庫.accdb";
 
-    // 你原本有 ConnectionString 這行其實不需要，會誤導，直接刪掉或留空都行
-    // public static string ConnectionString = "你的SQL連線字串";
 
     private static string GetDbPath()
     {
@@ -142,7 +140,7 @@ namespace 點餐頁面_新_
         }
 
         // =========================
-        // ✅ 新增：建立訂單 + 明細 + PAYMENT（一次交易）
+        // 建立訂單：ORDERS、訂單明細、PAYMENT 在同一個交易內寫入
         // =========================
         public static int CreateOrderWithPayment(
             Dictionary<int, (int qty, decimal price)> items,
@@ -227,7 +225,7 @@ namespace 點餐頁面_新_
             }
         }
 
-        // 你原本的熱銷（保留）
+        // 熱銷商品
         public class ProductSale
     {
         public int ProductId;

@@ -195,7 +195,7 @@ namespace 點餐頁面
                         new OleDbCommand("SELECT @@IDENTITY", conn, tran);
                     int orderId = Convert.ToInt32(cmdGetId.ExecuteScalar());
 
-                    // 訂單明細（⚠️ 表名請確認）
+                    // 訂單明細
                     foreach (DataRow row in cartTable.Rows)
                     {
                         string sqlDetail =

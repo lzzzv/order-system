@@ -325,16 +325,8 @@ namespace 點餐頁面_新_
             {
                 var f = new OrderForm();
 
-                // 你要 HomeForm 還留著就用 Show()
+                // 開啟點餐頁，首頁保留
                 f.Show();
-
-                // 如果你要「進到點餐」就把首頁關掉，用這兩行：
-                // f.Show();
-                // this.Hide();
-
-                // 如果你要「進到點餐」而且首頁直接關掉，用：
-                // f.Show();
-                // this.Close();
             };
             btnRow.Controls.Add(btnOrder);
 
@@ -455,23 +447,22 @@ namespace 點餐頁面_新_
             return _bestScroller;
         }
 
-        // ✅ DB 欄位存檔名：ex "burger_01.jpg"
+        // DB 欄位存的是圖片檔名，例如 "burger_01.jpg"
         private string BuildLocalImagePath(string fileNameFromDb, int catId)
         {
             string fileName = fileNameFromDb;
             if (string.IsNullOrWhiteSpace(fileName))
-                fileName = $"cat_{catId}.jpg"; // 沒填就用預設圖（你自己放 cat_3.jpg 這種）
+                fileName = $"cat_{catId}.jpg"; // 沒填檔名時使用分類預設圖，例如 cat_3.jpg
 
             return Path.Combine(ImagesFolder, fileName);
         }
 
-        // ✅ 不抖的 hover：MouseLeave 延遲檢查游標是否真的離開（防抖）
+        // 商品卡片：滑鼠移開時延遲確認，避免 hover 效果閃爍
         private Control CreateFoodCardWrap(ProductSale p, string localImagePath)
         {
-            // 你說卡片要「拉長一點」：Width 加一點
             var wrap = new Panel
             {
-                Width = 260,          // 原本 238 太窄，你要拉長：260
+                Width = 260,
                 Height = 220,
                 BackColor = Color.Transparent,
                 Margin = new Padding(0, 0, 14, 0)
@@ -562,7 +553,7 @@ namespace 點餐頁面_新_
                 ApplyShrink();
             };
 
-            // 綁到 wrap + card + card 子控件（但不再用 OnMouseEnter/Leave 轉送那種）
+            // 綁到 wrap、card 與 card 的子控制項
             HookEnter(wrap);
             HookLeave(wrap);
 
@@ -627,10 +618,10 @@ namespace 點餐頁面_新_
             var pic = new PictureBox
             {
                 Dock = DockStyle.Top,
-                Height = 95,                      // ✅ 圖片高度固定
+                Height = 95,                      // 圖片高度固定
                 BackColor = Color.Transparent,
                 SizeMode = PictureBoxSizeMode.Zoom,
-                Margin = new Padding(0, 4, 0, 8)  // ✅ 下方留空
+                Margin = new Padding(0, 4, 0, 8)  // 下方留空
             };
 
             // title / sub (top)
@@ -664,7 +655,7 @@ namespace 點餐頁面_新_
             };
             Ui.ApplyRound(badge, 14);
 
-            // ✅ Dock 加入順序很重要：Bottom → Fill → Top(sub) → Top(title) → badge
+            // Dock 加入順序會影響排版：Bottom → Fill → Top(sub) → Top(title) → badge
             card.Controls.Add(bottom);
             card.Controls.Add(pic);
             card.Controls.Add(sub);
@@ -678,7 +669,7 @@ namespace 點餐頁面_新_
                 badge.Top = 10;
             };
 
-            // ✅ 讀本機圖片（你用檔名）
+            // 讀取本機圖片
             Ui.LoadLocalImage(pic, localImagePath);
 
             return card;

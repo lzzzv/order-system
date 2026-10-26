@@ -76,7 +76,7 @@ namespace 點餐頁面
         private Timer _ballSnapTimer;
         private int _ballSnapTargetX;
 
-        // ===== 這三個你之後可接登入/選擇 =====
+        // ===== 預設顧客、員工與付款方式（之後可改成由登入畫面帶入） =====
         private int _customerId = 2;        
         private int _employeeId = 1;         
         private string _payWay = "現金";     
